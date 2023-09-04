@@ -1,13 +1,13 @@
 const mongoose = require('mongoose');
 
 const UserSchema = mongoose.Schema({
-    EmployeeName:{
+    employeeName:{
         type:String,
         required:true,
     },
     dob:{
         type:Date,
-        required:false,
+        required:true,
     },
     userName:{
         type:String,
@@ -55,25 +55,28 @@ const UserSchema = mongoose.Schema({
     },
     address:{
         type:String,
-        required:true,
+        required:false,
     },
     aadharNumber:{
         type:String,
         // here we store a image by using bucket or using multer(store the file at folder and make a id of name of using) 
-        required:true,
+        required:false,
     },
     panCard:{
         type:String,
         // here we store a image by using bucket or using multer(store the file at folder and make a id of name of using) 
-        required:true,
+        required:false,
     },
     photo:{
         type:String,
         // here we store a image by using bucket or using multer(store the file at folder and make a id of name of using) 
-        required:true,
+        required:false,
     },
     projects:{
-        type:Array
+        type:[mongoose.Schema.Types.ObjectId],
+        // collection : reference
+        ref:"Project",
+        required:false,
     }
 
 });

@@ -4,6 +4,7 @@ var mongoose = require('mongoose');
 
 var indexRouter = require('./routes/index');
 var authRouter = require('./routes/auth');
+var projectRouter = require('./routes/project');
 
 var app = express();
 
@@ -22,6 +23,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/auth', authRouter);
-
+app.use('/project',projectRouter);
 
 module.exports = app;
