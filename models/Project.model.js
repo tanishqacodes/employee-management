@@ -16,6 +16,7 @@ var ProjectSchema = mongoose.Schema({
     createdBy:{
         type:mongoose.Schema.Types.ObjectId,
         ref:"User",
+        required:true,
     },
     isDeleted:{
         type:Boolean,
@@ -29,7 +30,7 @@ var ProjectSchema = mongoose.Schema({
         type:[mongoose.Schema.Types.ObjectId],
         ref:"Task",
     },
-    prejectMembers:{
+    projectMembers:{
         type:[mongoose.Schema.Types.ObjectId],
         ref:"User",
     },
