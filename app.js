@@ -3,8 +3,8 @@ var path = require('path');
 var mongoose = require('mongoose');
 
 var indexRouter = require('./routes/index');
-var authRouter = require('./routes/auth');
-var projectRouter = require('./routes/project');
+var authRouter = require('./routes/Authentication.Routes');
+var projectRouter = require('./routes/Project.Routes');
 
 var app = express();
 
