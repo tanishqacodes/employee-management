@@ -20,6 +20,8 @@ router.get("/getProjectByUserId/:userId",AuthenticationMiddleware.autheticate,Pr
 
 router.post("/assignProjectToUser",AuthenticationMiddleware.autheticate,ProjectController.assignProjectToUser);
 
+router.delete("/deleteProjectById/:projectId",AuthenticationMiddleware.autheticate,ProjectController.deleteProjectById);
 
+router.put("/updateProjectById/:projectId",AuthenticationMiddleware.autheticate,ProjectController.updateProjectById);
 
 module.exports = router;

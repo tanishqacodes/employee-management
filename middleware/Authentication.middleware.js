@@ -32,7 +32,9 @@ const AuthenticationMiddleware = {
         )
 
         return token;
-    }
+    },
+
+    
 }
 
 module.exports = AuthenticationMiddleware;
