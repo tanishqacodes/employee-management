@@ -11,4 +11,6 @@ router.get("/getTasksByProject/:projectId",AuthenticationMiddleware.autheticate,
 
 router.put("/updateTaskById/:taskId",AuthenticationMiddleware.autheticate,TaskController.updateTaskById);
 
+router.delete("/deleteTaskById/:taskId",AuthenticationMiddleware.autheticate,TaskController.deleteTaskById);
+
 module.exports = router;

@@ -100,6 +100,32 @@ const TaskController = {
 
         return res.status(200).send("Task updated successfully");
     },
+
+    deleteTaskById : async (req,res)=>{
+        const { taskId } = req.params;
+        let checkIfTaskExists;
+        try {
+            checkIfTaskExists = await TaskModel.findOne({ _id : taskId });
+        } catch (error) {
+            return res.status(400).send("provide valid input ....");
+        }
+
+        if(!checkIfTaskExists){
+            return res.status(400).send("Task does not exists ...");
+        }
+
+        const result = await TaskModel.deleteOne({ _id : taskId });
+
+        if(result.deletedCount === 1){
+            return res.status(200).json({
+                status: true,
+            });
+        }
+        return res.status(500).json({
+            status: false,
+            error : 'internal server error ,  member not deleted.',
+        });
+    }
 }
 
 module.exports = TaskController;
