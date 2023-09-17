@@ -26,10 +26,6 @@ var ProjectSchema = mongoose.Schema({
         type:Boolean,
         default:false,
     },
-    tasks:{
-        type:[mongoose.Schema.Types.ObjectId],
-        ref:"Task",
-    },
     projectMembers:{
         type:[mongoose.Schema.Types.ObjectId],
         ref:"User",

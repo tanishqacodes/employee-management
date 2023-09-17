@@ -6,13 +6,12 @@ const AuthenticationMiddleware = {
 
         try {
             let token = req.headers.authorization.split(" ")[1];
-            let decoded = jwt.verify(token, JWT_SECRET);
+            let decoded = jwt.verify(token,JWT_SECERT);
             req.user = decoded;
-
+            next();
         } catch (error) {
-            res.status(401).send("unauthorized...");
+            res.status(401).send("Unauthorized...");
         }
-        next();
     },
 
     generateToken: (user) => {
