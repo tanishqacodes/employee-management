@@ -14,6 +14,10 @@ const AuthController = {
             return res.send("User not found");
         }
 
+        // email verification
+        if(!ifUserFounded.isEmailVerified){
+            return res.status(401).send("Please verify your email..");
+        }
         // hashed password , password
         let isPasswordMatched = await bcrypt.compare(password, ifUserFounded.password);
 
