@@ -9,14 +9,14 @@ router.post("/create",AuthenticationMiddleware.autheticate,ProjectController.cre
 
 // fetch all project
 
-router.get("/getAllProjects",AuthenticationMiddleware.autheticate,ProjectController.getALlProject);
+router.get("/getAllProjects",AuthenticationMiddleware.autheticate,ProjectController.getAllProject);
 
 // id : wise Project details
 
 router.get("/getProjectById/:projectId",AuthenticationMiddleware.autheticate ,ProjectController.getProjectById);
 
 // get prject by user id
-router.get("/getProjectByUserId/:userId",AuthenticationMiddleware.autheticate,ProjectController.getProjectByUserId);
+router.get("/getProjectByUser",AuthenticationMiddleware.autheticate,ProjectController.getProjectByUser);
 
 router.post("/assignProjectToUser",AuthenticationMiddleware.autheticate,ProjectController.assignProjectToUser);
 

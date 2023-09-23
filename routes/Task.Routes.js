@@ -13,4 +13,6 @@ router.put("/updateTaskById/:taskId",AuthenticationMiddleware.autheticate,TaskCo
 
 router.delete("/deleteTaskById/:taskId",AuthenticationMiddleware.autheticate,TaskController.deleteTaskById);
 
+router.post("/assignTaskToUser",AuthenticationMiddleware.autheticate,TaskController.assignTask);
+
 module.exports = router;
