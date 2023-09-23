@@ -1,0 +1,3 @@
+const JWT_SECERT = "fdyugfiwokdmcngfoidjskndbwiuodpklxngfcdertyuioplgvbgfcvbytrdcnjytfcvhtrdcvbjuytrdxcvbhgtfrdcvgtrdxbnhytfrdckmnbvcfdrtyuijknbvcfdrtyuijk";
+
+module.exports = JWT_SECERT;

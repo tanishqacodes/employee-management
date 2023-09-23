@@ -1,6 +1,8 @@
 var bcrypt = require("bcrypt");
 var User = require("../models/User.model");
 var AuthenticationMiddleware = require('../middleware/Authentication.middleware');
+const { sendEmail } = require("../utils/emailVerification.utils");
+const UserModel = require("../models/User.model");
 
 const AuthController = {
     loginUser: async (req, res) => {
@@ -22,7 +24,7 @@ const AuthController = {
         return res.send({
             status: "success",
             data: ifUserFounded,
-            token : token
+            token: token
         });
     },
 
@@ -53,12 +55,42 @@ const AuthController = {
         let dataSaved = await user.save();
 
         if (dataSaved) {
-            return res.send("User registered successfully ....");
+            const token = AuthenticationMiddleware.generateToken({
+                email: email,
+            });
+
+            const isMailSent = await sendEmail(email, token);
+            if (!isMailSent) {
+                return res.send("Email is not send");
+            }
+
+            return res.send("User registered successfully , please verify your email");
         }
         else {
             return res.send("Something went wrong user is not registered due to error...");
         }
-    }
-}
+    },
 
+    verifyEmail: async (req, res) => {
+        const encodedToken = req.params;
+        const decodedToken = await AuthenticationMiddleware.verifyEmailToken(encodedToken);
+        // console.log("decode in verify emial : ",decodedToken);
+        if (decodedToken) {
+            let ifUserFounded = await UserModel.findOne({
+                email: decodedToken.email,
+            });
+            console.log("user : ",ifUserFounded);
+            if (!ifUserFounded) {
+                return res.status(400).send("User not found...");
+            } 
+            ifUserFounded.isEmailVerified = true;
+            let isUserSaved = await ifUserFounded.save();
+            if (!isUserSaved) {
+                return res.status(500).send("Something went wrong");
+            } 
+            return res.status(200).send("Email verified successfully");
+        }
+        return res.status(500).send("Something went wrong");
+    } 
+}
 module.exports = AuthController;

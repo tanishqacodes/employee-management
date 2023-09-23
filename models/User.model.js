@@ -37,6 +37,10 @@ const UserSchema = mongoose.Schema({
         ref:"Task",
         required:false,
     },
+    isEmailVerified: {
+        type: Boolean,
+        default: false,
+    },
     isDeleted:{
         type:Boolean,
         default:false,

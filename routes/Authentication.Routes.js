@@ -22,5 +22,6 @@ router.post("/register", AuthController.registerUser
   // input from the user thorugh frontend
 );
 
+router.get("/verify/:token",AuthController.verifyEmail);
 
 module.exports = router;

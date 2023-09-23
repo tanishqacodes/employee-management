@@ -1,5 +1,5 @@
 const jwt = require("jsonwebtoken");
-const JWT_SECERT = "fdyugfiwokdmcngfoidjskndbwiuodpklxngfcdertyuioplgvbgfcvbytrdcnjytfcvhtrdcvbjuytrdxcvbhgtfrdcvgtrdxbnhytfrdckmnbvcfdrtyuijknbvcfdrtyuijk";
+const JWT_SECERT = require("../utils/JWT_SECRET");
 
 const AuthenticationMiddleware = {
     autheticate: (req, res, next)=>{
@@ -34,7 +34,20 @@ const AuthenticationMiddleware = {
         return token;
     },
 
-    
-}
+    verifyEmailToken : async(encodedToken)=>{
+        try {
+            console.log("verigy token : ",encodedToken.token);
+            let decodedToken = jwt.verify(encodedToken.token,JWT_SECERT);
+            console.log('decodedToken : ', decodedToken);
+            let decoded = jwt.verify(decodedToken.userId, JWT_SECERT);
+            console.log("decodes : ",decoded);
+            return decoded;
+        } catch (error) {
+            console.log("error in verification email : ",error);
+            return false;
+        }
+    },
 
-module.exports = AuthenticationMiddleware;
+};
+
+module.exports = AuthenticationMiddleware; 
