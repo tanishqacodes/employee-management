@@ -8,6 +8,10 @@ var projectRouter = require('./routes/Project.Routes');
 var taskRouter = require('./routes/Task.Routes');
 var userRouter = require('./routes/User.Routes');
 
+// swagger
+const swaggerUi = require("swagger-ui-express");
+const swaggerFile = require("./swagger_output.json");
+
 var app = express();
 
 // database connection
@@ -28,5 +32,8 @@ app.use('/auth', authRouter);
 app.use('/project',projectRouter);
 app.use('/task',taskRouter);
 app.use('/user',userRouter);
+
+// swagger
+app.use("/swagger", swaggerUi.serve, swaggerUi.setup(swaggerFile));
 
 module.exports = app;
